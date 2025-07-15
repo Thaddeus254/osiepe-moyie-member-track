@@ -20,8 +20,8 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
   ];
 
   return (
-    <nav className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b border-border">
-      <div className="container flex h-16 items-center">
+    <nav className="bg-background/95 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b border-border/50 shadow-soft">
+      <div className="container flex h-18 items-center">
         <div className="mr-4 flex">
           <a className="mr-6 flex items-center space-x-2" href="#">
             <div className="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center">
