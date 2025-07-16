@@ -95,7 +95,6 @@ export function Navigation({ currentPage, onPageChange, userType, userData, onLo
                 Login
               </Button>
             )}
-            </Button>
             <button
               className="inline-flex items-center justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-10 w-10 px-0 md:hidden hover:bg-muted/50"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
