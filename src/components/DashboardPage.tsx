@@ -6,19 +6,10 @@ import { Badge } from './ui/badge';
 
 interface DashboardPageProps {
   onPageChange: (page: string) => void;
+  memberData: any;
 }
 
-export function DashboardPage({ onPageChange }: DashboardPageProps) {
-  const memberData = {
-    name: "John Doe",
-    memberId: "OM001",
-    joinDate: "January 2020",
-    status: "Active",
-    totalContributions: 12000,
-    currentBalance: 8500,
-    pendingFines: 200,
-    nextDueDate: "March 15, 2024"
-  };
+export function DashboardPage({ onPageChange, memberData }: DashboardPageProps) {
 
   const recentTransactions = [
     { date: "Feb 15, 2024", type: "Monthly Contribution", amount: 200, status: "Paid" },
@@ -34,21 +25,21 @@ export function DashboardPage({ onPageChange }: DashboardPageProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-hero py-8 px-4">
-      <div className="container mx-auto max-w-7xl space-y-8">
+    <div className="min-h-screen bg-gradient-hero py-6 px-4">
+      <div className="container mx-auto max-w-7xl space-y-6">
         {/* Header */}
-        <div className="space-y-2">
+        <div className="space-y-3 py-4">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground">
             Welcome back, {memberData.name}
           </h1>
           <p className="text-muted-foreground">
-            Member ID: {memberData.memberId} • Joined: {memberData.joinDate}
+            Member ID: {memberData.id} • Joined: {memberData.joinDate} • Status: {memberData.status}
           </p>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="shadow-soft hover:shadow-medium transition-all">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card className="shadow-soft hover:shadow-medium transition-all border-l-4 border-l-success">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Contributions</CardTitle>
               <DollarSign className="h-4 w-4 text-success" />
@@ -59,7 +50,7 @@ export function DashboardPage({ onPageChange }: DashboardPageProps) {
             </CardContent>
           </Card>
 
-          <Card className="shadow-soft hover:shadow-medium transition-all">
+          <Card className="shadow-soft hover:shadow-medium transition-all border-l-4 border-l-primary">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Current Balance</CardTitle>
               <TrendingUp className="h-4 w-4 text-primary" />
@@ -70,7 +61,7 @@ export function DashboardPage({ onPageChange }: DashboardPageProps) {
             </CardContent>
           </Card>
 
-          <Card className="shadow-soft hover:shadow-medium transition-all">
+          <Card className="shadow-soft hover:shadow-medium transition-all border-l-4 border-l-warning">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Pending Fines</CardTitle>
               <AlertTriangle className="h-4 w-4 text-warning" />
@@ -81,23 +72,23 @@ export function DashboardPage({ onPageChange }: DashboardPageProps) {
             </CardContent>
           </Card>
 
-          <Card className="shadow-soft hover:shadow-medium transition-all">
+          <Card className="shadow-soft hover:shadow-medium transition-all border-l-4 border-l-accent">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Next Due Date</CardTitle>
               <Clock className="h-4 w-4 text-accent" />
             </CardHeader>
             <CardContent>
-              <div className="text-lg font-bold text-foreground">{memberData.nextDueDate}</div>
+              <div className="text-lg font-bold text-foreground">March 15, 2024</div>
               <p className="text-xs text-muted-foreground">Monthly contribution due</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-6">
           {/* Recent Transactions */}
           <div className="lg:col-span-2">
-            <Card className="shadow-soft">
+            <Card className="shadow-soft border-0 bg-white/95">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
@@ -114,9 +105,9 @@ export function DashboardPage({ onPageChange }: DashboardPageProps) {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {recentTransactions.map((transaction, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 rounded-lg border border-border">
+                    <div key={index} className="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-muted/30 transition-colors">
                       <div className="space-y-1">
                         <p className="font-medium text-foreground">{transaction.type}</p>
                         <p className="text-sm text-muted-foreground">{transaction.date}</p>
@@ -141,15 +132,15 @@ export function DashboardPage({ onPageChange }: DashboardPageProps) {
 
           {/* Upcoming Events */}
           <div>
-            <Card className="shadow-soft">
+            <Card className="shadow-soft border-0 bg-white/95">
               <CardHeader>
                 <CardTitle className="text-foreground">Upcoming Events</CardTitle>
                 <CardDescription>Don't miss these important dates</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {upcomingEvents.map((event, index) => (
-                    <div key={index} className="space-y-2 p-4 rounded-lg bg-muted">
+                    <div key={index} className="space-y-2 p-4 rounded-lg bg-gradient-card border border-border/50 hover:shadow-soft transition-all">
                       <div className="flex items-center text-sm text-primary font-medium">
                         <Calendar className="h-4 w-4 mr-2" />
                         {event.date}
@@ -165,15 +156,15 @@ export function DashboardPage({ onPageChange }: DashboardPageProps) {
         </div>
 
         {/* Quick Actions */}
-        <Card className="shadow-soft">
+        <Card className="shadow-soft border-0 bg-white/95">
           <CardHeader>
             <CardTitle className="text-foreground">Quick Actions</CardTitle>
             <CardDescription>Common tasks you might want to perform</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <Button 
-                className="bg-gradient-primary text-primary-foreground shadow-medium hover:shadow-strong transition-all"
+                className="bg-gradient-primary text-primary-foreground shadow-medium hover:shadow-strong transition-all h-12"
                 onClick={() => onPageChange('contributions')}
               >
                 <DollarSign className="mr-2 h-4 w-4" />
@@ -181,6 +172,7 @@ export function DashboardPage({ onPageChange }: DashboardPageProps) {
               </Button>
               <Button 
                 variant="outline"
+                className="h-12 hover:bg-muted/70 transition-all"
                 onClick={() => onPageChange('documents')}
               >
                 <Calendar className="mr-2 h-4 w-4" />
@@ -188,6 +180,7 @@ export function DashboardPage({ onPageChange }: DashboardPageProps) {
               </Button>
               <Button 
                 variant="outline"
+                className="h-12 hover:bg-muted/70 transition-all"
                 onClick={() => onPageChange('voting')}
               >
                 <CheckCircle className="mr-2 h-4 w-4" />
